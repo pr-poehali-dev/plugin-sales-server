@@ -118,6 +118,17 @@ const Index = () => {
   const addToCart = (plugin: Plugin) => {
     if (!cart.find(item => item.id === plugin.id)) {
       setCart([...cart, plugin]);
+      // Уведомление о добавлении в корзину
+      if (typeof window !== 'undefined' && 'Notification' in window) {
+        if (Notification.permission === 'granted') {
+          new Notification('Плагин добавлен в корзину', {
+            body: `${plugin.name} - ${plugin.price} ₽`,
+            icon: '/img/399710fb-b989-42a4-8869-f41e6eb43bbe.jpg'
+          });
+        } else if (Notification.permission !== 'denied') {
+          Notification.requestPermission();
+        }
+      }
     }
   };
 
@@ -373,7 +384,7 @@ const Index = () => {
             <div>
               <h3 className="font-bold text-lg mb-4">Поддержка</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-primary transition-colors">Техподдержка</a></li>
+                <li><a href="/support" className="hover:text-primary transition-colors">Техподдержка</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">FAQ</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">Документация</a></li>
               </ul>
