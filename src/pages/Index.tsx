@@ -144,6 +144,10 @@ const Index = () => {
             </div>
             
             <div className="flex items-center space-x-4">
+              <Button variant="ghost" onClick={() => window.location.href = '/profile'}>
+                <Icon name="User" className="mr-2" size={20} />
+                Профиль
+              </Button>
               <Button
                 variant="outline"
                 onClick={() => setCartOpen(!cartOpen)}
@@ -259,7 +263,11 @@ const Index = () => {
                         <span>Итого:</span>
                         <span className="text-primary">{getTotalPrice()} ₽</span>
                       </div>
-                      <Button className="w-full" size="lg">
+                      <Button 
+                        className="w-full" 
+                        size="lg"
+                        onClick={() => window.location.href = '/checkout'}
+                      >
                         <Icon name="CreditCard" className="mr-2" size={20} />
                         Оформить заказ
                       </Button>
