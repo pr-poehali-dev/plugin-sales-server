@@ -61,6 +61,12 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				rust: {
+					orange: '#D2691E',
+					brown: '#8B4513', 
+					dark: '#2F4F4F',
+					metal: '#708090'
 				}
 			},
 			borderRadius: {
