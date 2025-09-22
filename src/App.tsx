@@ -8,6 +8,8 @@ import Index from "./pages/Index";
 import Profile from "./pages/Profile";
 import Checkout from "./pages/Checkout";
 import Support from "./pages/Support";
+import Admin from "./pages/Admin";
+import PluginDetails from "./pages/PluginDetails";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +25,8 @@ const App = () => (
           <Route path="/profile" element={<Profile />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/plugin/:id" element={<PluginDetails />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

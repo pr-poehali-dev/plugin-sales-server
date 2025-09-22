@@ -155,6 +155,10 @@ const Index = () => {
             </div>
             
             <div className="flex items-center space-x-4">
+              <Button variant="ghost" onClick={() => window.location.href = '/admin'} className="text-xs">
+                <Icon name="Shield" className="mr-1" size={16} />
+                Admin
+              </Button>
               <Button variant="ghost" onClick={() => window.location.href = '/profile'}>
                 <Icon name="User" className="mr-2" size={20} />
                 Профиль
@@ -291,7 +295,7 @@ const Index = () => {
             {/* Plugin Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {filteredPlugins.map(plugin => (
-                <Card key={plugin.id} className="hover:shadow-lg transition-shadow">
+                <Card key={plugin.id} className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => window.location.href = `/plugin/${plugin.id}`}>
                   <div className="aspect-video bg-muted rounded-t-lg overflow-hidden">
                     <img 
                       src={plugin.image} 
