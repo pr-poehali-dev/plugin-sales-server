@@ -213,7 +213,7 @@ const PluginDetails = () => {
               <Icon name="Settings" className="text-primary" size={32} />
               <div>
                 <h1 className="text-3xl font-bold text-foreground">
-                  RUST ToxicRust STORE
+                  RUST ToxicRust
                 </h1>
                 <p className="text-muted-foreground">Детали плагина</p>
               </div>

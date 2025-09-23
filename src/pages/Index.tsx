@@ -178,7 +178,7 @@ const Index = () => {
               <Icon name="Settings" className="text-primary" size={32} />
               <div>
                 <h1 className="text-3xl font-bold text-foreground">
-                  RUST ToxicRust STORE
+                  RUST ToxicRust
                 </h1>
                 <p className="text-muted-foreground">
                   Магазин плагинов для серверов Rust
@@ -555,7 +555,7 @@ const Index = () => {
           </div>
           <Separator className="my-8" />
           <div className="text-center text-sm text-muted-foreground">
-            <p>© 2024 Rust ToxicRust Store. Все права защищены.</p>
+            <p>© 2024 Rust ToxicRust . Все права защищены.</p>
           </div>
         </div>
       </footer>
