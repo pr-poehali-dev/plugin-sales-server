@@ -177,10 +177,10 @@ const Index = () => {
             <div className="flex items-center space-x-4">
               <Icon name="Settings" className="text-primary" size={32} />
               <div>
-                <h1 className="text-3xl font-bold text-foreground">
+                <h1 className="font-black mx-0 text-3xl text-orange-700">
                   RUST ToxicRust
                 </h1>
-                <p className="text-muted-foreground">
+                <p className="text-red-900 mx-[5px] text-justify font-black">
                   Магазин плагинов для серверов Rust
                 </p>
               </div>
@@ -372,7 +372,7 @@ const Index = () => {
                     <img
                       src={plugin.image}
                       alt={plugin.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover rounded-0 py-0"
                     />
                   </div>
 
