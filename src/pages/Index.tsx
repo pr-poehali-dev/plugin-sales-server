@@ -220,7 +220,7 @@ const Index = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8 bg-blue-900 rounded-0">
+      <div className="container mx-auto px-4 py-8 rounded-0 bg-transparent">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Filters Sidebar */}
           <div className="lg:w-1/4">
