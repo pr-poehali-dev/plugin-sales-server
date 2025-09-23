@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Separator } from '@/components/ui/separator';
-import Icon from '@/components/ui/icon';
+import React, { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import Icon from "@/components/ui/icon";
 
 interface Plugin {
   id: number;
@@ -24,26 +37,28 @@ const mockPlugins: Plugin[] = [
   {
     id: 1,
     name: "Advanced Building System",
-    description: "Расширенная система строительства с новыми материалами и инструментами",
+    description:
+      "Расширенная система строительства с новыми материалами и инструментами",
     price: 299,
     rating: 4.8,
     downloads: 15420,
     category: "Строительство",
     compatibility: "Rust 2023+",
     author: "BuildMaster",
-    image: "/img/399710fb-b989-42a4-8869-f41e6eb43bbe.jpg"
+    image: "/img/399710fb-b989-42a4-8869-f41e6eb43bbe.jpg",
   },
   {
     id: 2,
     name: "Combat Overhaul",
-    description: "Полная переработка боевой системы с новым оружием и механиками",
+    description:
+      "Полная переработка боевой системы с новым оружием и механиками",
     price: 499,
     rating: 4.9,
     downloads: 8932,
     category: "PvP",
     compatibility: "Rust 2024+",
     author: "WarForge",
-    image: "/img/399710fb-b989-42a4-8869-f41e6eb43bbe.jpg"
+    image: "/img/399710fb-b989-42a4-8869-f41e6eb43bbe.jpg",
   },
   {
     id: 3,
@@ -55,7 +70,7 @@ const mockPlugins: Plugin[] = [
     category: "Утилиты",
     compatibility: "Rust 2022+",
     author: "DevTools",
-    image: "/img/399710fb-b989-42a4-8869-f41e6eb43bbe.jpg"
+    image: "/img/399710fb-b989-42a4-8869-f41e6eb43bbe.jpg",
   },
   {
     id: 4,
@@ -67,7 +82,7 @@ const mockPlugins: Plugin[] = [
     category: "Администрирование",
     compatibility: "Rust 2023+",
     author: "AdminPro",
-    image: "/img/399710fb-b989-42a4-8869-f41e6eb43bbe.jpg"
+    image: "/img/399710fb-b989-42a4-8869-f41e6eb43bbe.jpg",
   },
   {
     id: 5,
@@ -79,7 +94,7 @@ const mockPlugins: Plugin[] = [
     category: "Транспорт",
     compatibility: "Rust 2024+",
     author: "VehicleMods",
-    image: "/img/399710fb-b989-42a4-8869-f41e6eb43bbe.jpg"
+    image: "/img/399710fb-b989-42a4-8869-f41e6eb43bbe.jpg",
   },
   {
     id: 6,
@@ -91,41 +106,54 @@ const mockPlugins: Plugin[] = [
     category: "Экономика",
     compatibility: "Rust 2023+",
     author: "EconSoft",
-    image: "/img/399710fb-b989-42a4-8869-f41e6eb43bbe.jpg"
-  }
+    image: "/img/399710fb-b989-42a4-8869-f41e6eb43bbe.jpg",
+  },
 ];
 
 const Index = () => {
   const [plugins, setPlugins] = useState<Plugin[]>(mockPlugins);
   const [cart, setCart] = useState<Plugin[]>([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [selectedCompatibility, setSelectedCompatibility] = useState<string>('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [selectedCompatibility, setSelectedCompatibility] =
+    useState<string>("all");
   const [cartOpen, setCartOpen] = useState(false);
 
-  const categories = ['all', 'Строительство', 'PvP', 'Утилиты', 'Администрирование', 'Транспорт', 'Экономика'];
-  const compatibilities = ['all', 'Rust 2022+', 'Rust 2023+', 'Rust 2024+'];
+  const categories = [
+    "all",
+    "Строительство",
+    "PvP",
+    "Утилиты",
+    "Администрирование",
+    "Транспорт",
+    "Экономика",
+  ];
+  const compatibilities = ["all", "Rust 2022+", "Rust 2023+", "Rust 2024+"];
 
-  const filteredPlugins = plugins.filter(plugin => {
-    const matchesSearch = plugin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         plugin.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || plugin.category === selectedCategory;
-    const matchesCompatibility = selectedCompatibility === 'all' || plugin.compatibility === selectedCompatibility;
-    
+  const filteredPlugins = plugins.filter((plugin) => {
+    const matchesSearch =
+      plugin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      plugin.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      selectedCategory === "all" || plugin.category === selectedCategory;
+    const matchesCompatibility =
+      selectedCompatibility === "all" ||
+      plugin.compatibility === selectedCompatibility;
+
     return matchesSearch && matchesCategory && matchesCompatibility;
   });
 
   const addToCart = (plugin: Plugin) => {
-    if (!cart.find(item => item.id === plugin.id)) {
+    if (!cart.find((item) => item.id === plugin.id)) {
       setCart([...cart, plugin]);
       // Уведомление о добавлении в корзину
-      if (typeof window !== 'undefined' && 'Notification' in window) {
-        if (Notification.permission === 'granted') {
-          new Notification('Плагин добавлен в корзину', {
+      if (typeof window !== "undefined" && "Notification" in window) {
+        if (Notification.permission === "granted") {
+          new Notification("Плагин добавлен в корзину", {
             body: `${plugin.name} - ${plugin.price} ₽`,
-            icon: '/img/399710fb-b989-42a4-8869-f41e6eb43bbe.jpg'
+            icon: "/img/399710fb-b989-42a4-8869-f41e6eb43bbe.jpg",
           });
-        } else if (Notification.permission !== 'denied') {
+        } else if (Notification.permission !== "denied") {
           Notification.requestPermission();
         }
       }
@@ -133,7 +161,7 @@ const Index = () => {
   };
 
   const removeFromCart = (pluginId: number) => {
-    setCart(cart.filter(item => item.id !== pluginId));
+    setCart(cart.filter((item) => item.id !== pluginId));
   };
 
   const getTotalPrice = () => {
@@ -149,17 +177,28 @@ const Index = () => {
             <div className="flex items-center space-x-4">
               <Icon name="Settings" className="text-primary" size={32} />
               <div>
-                <h1 className="text-3xl font-bold text-foreground">RUST PLUGINS STORE</h1>
-                <p className="text-muted-foreground">Магазин плагинов для серверов Rust</p>
+                <h1 className="text-3xl font-bold text-foreground">
+                  RUST ToxicRust STORE
+                </h1>
+                <p className="text-muted-foreground">
+                  Магазин плагинов для серверов Rust
+                </p>
               </div>
             </div>
-            
+
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" onClick={() => window.location.href = '/admin'} className="text-xs">
+              <Button
+                variant="ghost"
+                onClick={() => (window.location.href = "/admin")}
+                className="text-xs"
+              >
                 <Icon name="Shield" className="mr-1" size={16} />
                 Admin
               </Button>
-              <Button variant="ghost" onClick={() => window.location.href = '/profile'}>
+              <Button
+                variant="ghost"
+                onClick={() => (window.location.href = "/profile")}
+              >
                 <Icon name="User" className="mr-2" size={20} />
                 Профиль
               </Button>
@@ -194,40 +233,54 @@ const Index = () => {
               </CardHeader>
               <CardContent className="space-y-6">
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Поиск</label>
+                  <label className="text-sm font-medium mb-2 block">
+                    Поиск
+                  </label>
                   <Input
                     placeholder="Поиск плагинов..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
                 </div>
-                
+
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Категория</label>
-                  <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                  <label className="text-sm font-medium mb-2 block">
+                    Категория
+                  </label>
+                  <Select
+                    value={selectedCategory}
+                    onValueChange={setSelectedCategory}
+                  >
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      {categories.map(category => (
+                      {categories.map((category) => (
                         <SelectItem key={category} value={category}>
-                          {category === 'all' ? 'Все категории' : category}
+                          {category === "all" ? "Все категории" : category}
                         </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
-                
+
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Совместимость</label>
-                  <Select value={selectedCompatibility} onValueChange={setSelectedCompatibility}>
+                  <label className="text-sm font-medium mb-2 block">
+                    Совместимость
+                  </label>
+                  <Select
+                    value={selectedCompatibility}
+                    onValueChange={setSelectedCompatibility}
+                  >
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      {compatibilities.map(compatibility => (
+                      {compatibilities.map((compatibility) => (
                         <SelectItem key={compatibility} value={compatibility}>
-                          {compatibility === 'all' ? 'Все версии' : compatibility}
+                          {compatibility === "all"
+                            ? "Все версии"
+                            : compatibility}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -248,21 +301,32 @@ const Index = () => {
                       <Icon name="ShoppingCart" className="mr-2" size={20} />
                       Корзина ({cart.length})
                     </span>
-                    <Button variant="ghost" size="sm" onClick={() => setCartOpen(false)}>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setCartOpen(false)}
+                    >
                       <Icon name="X" size={16} />
                     </Button>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   {cart.length === 0 ? (
-                    <p className="text-muted-foreground text-center py-4">Корзина пуста</p>
+                    <p className="text-muted-foreground text-center py-4">
+                      Корзина пуста
+                    </p>
                   ) : (
                     <div className="space-y-4">
-                      {cart.map(item => (
-                        <div key={item.id} className="flex items-center justify-between p-3 bg-muted rounded-lg">
+                      {cart.map((item) => (
+                        <div
+                          key={item.id}
+                          className="flex items-center justify-between p-3 bg-muted rounded-lg"
+                        >
                           <div className="flex-1">
                             <h4 className="font-semibold">{item.name}</h4>
-                            <p className="text-sm text-muted-foreground">{item.price} ₽</p>
+                            <p className="text-sm text-muted-foreground">
+                              {item.price} ₽
+                            </p>
                           </div>
                           <Button
                             variant="ghost"
@@ -276,12 +340,14 @@ const Index = () => {
                       <Separator />
                       <div className="flex justify-between items-center font-bold text-lg">
                         <span>Итого:</span>
-                        <span className="text-primary">{getTotalPrice()} ₽</span>
+                        <span className="text-primary">
+                          {getTotalPrice()} ₽
+                        </span>
                       </div>
-                      <Button 
-                        className="w-full" 
+                      <Button
+                        className="w-full"
                         size="lg"
-                        onClick={() => window.location.href = '/checkout'}
+                        onClick={() => (window.location.href = "/checkout")}
                       >
                         <Icon name="CreditCard" className="mr-2" size={20} />
                         Оформить заказ
@@ -294,32 +360,46 @@ const Index = () => {
 
             {/* Plugin Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {filteredPlugins.map(plugin => (
-                <Card key={plugin.id} className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => window.location.href = `/plugin/${plugin.id}`}>
+              {filteredPlugins.map((plugin) => (
+                <Card
+                  key={plugin.id}
+                  className="hover:shadow-lg transition-shadow cursor-pointer"
+                  onClick={() =>
+                    (window.location.href = `/plugin/${plugin.id}`)
+                  }
+                >
                   <div className="aspect-video bg-muted rounded-t-lg overflow-hidden">
-                    <img 
-                      src={plugin.image} 
+                    <img
+                      src={plugin.image}
                       alt={plugin.name}
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  
+
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <CardTitle className="text-lg">{plugin.name}</CardTitle>
-                        <CardDescription className="text-sm">by {plugin.author}</CardDescription>
+                        <CardDescription className="text-sm">
+                          by {plugin.author}
+                        </CardDescription>
                       </div>
                       <Badge variant="secondary">{plugin.category}</Badge>
                     </div>
                   </CardHeader>
-                  
+
                   <CardContent>
-                    <p className="text-sm text-muted-foreground mb-4">{plugin.description}</p>
-                    
+                    <p className="text-sm text-muted-foreground mb-4">
+                      {plugin.description}
+                    </p>
+
                     <div className="flex items-center space-x-4 text-sm text-muted-foreground mb-4">
                       <div className="flex items-center">
-                        <Icon name="Star" className="text-yellow-500 fill-current mr-1" size={16} />
+                        <Icon
+                          name="Star"
+                          className="text-yellow-500 fill-current mr-1"
+                          size={16}
+                        />
                         <span>{plugin.rating}</span>
                       </div>
                       <div className="flex items-center">
@@ -327,24 +407,30 @@ const Index = () => {
                         <span>{plugin.downloads.toLocaleString()}</span>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center text-sm text-muted-foreground mb-4">
-                      <Icon name="Check" className="mr-1 text-green-500" size={16} />
+                      <Icon
+                        name="Check"
+                        className="mr-1 text-green-500"
+                        size={16}
+                      />
                       <span>{plugin.compatibility}</span>
                     </div>
                   </CardContent>
-                  
+
                   <CardFooter className="flex items-center justify-between">
-                    <div className="text-2xl font-bold text-primary">{plugin.price} ₽</div>
-                    <Button 
+                    <div className="text-2xl font-bold text-primary">
+                      {plugin.price} ₽
+                    </div>
+                    <Button
                       onClick={() => addToCart(plugin)}
-                      disabled={cart.some(item => item.id === plugin.id)}
+                      disabled={cart.some((item) => item.id === plugin.id)}
                       className="min-w-[120px]"
                     >
-                      {cart.some(item => item.id === plugin.id) ? (
+                      {cart.some((item) => item.id === plugin.id) ? (
                         <>
-                          <Icon name="Check" className="mr-2" size={16} />
-                          В корзине
+                          <Icon name="Check" className="mr-2" size={16} />В
+                          корзине
                         </>
                       ) : (
                         <>
@@ -361,8 +447,14 @@ const Index = () => {
             {filteredPlugins.length === 0 && (
               <Card className="text-center py-12">
                 <CardContent>
-                  <Icon name="Search" className="mx-auto text-muted-foreground mb-4" size={48} />
-                  <h3 className="text-xl font-semibold mb-2">Плагины не найдены</h3>
+                  <Icon
+                    name="Search"
+                    className="mx-auto text-muted-foreground mb-4"
+                    size={48}
+                  />
+                  <h3 className="text-xl font-semibold mb-2">
+                    Плагины не найдены
+                  </h3>
                   <p className="text-muted-foreground">
                     Попробуйте изменить фильтры или поисковый запрос
                   </p>
@@ -380,39 +472,90 @@ const Index = () => {
             <div>
               <h3 className="font-bold text-lg mb-4">Магазин</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-primary transition-colors">Каталог</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Новинки</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Популярное</a></li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    Каталог
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    Новинки
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    Популярное
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
               <h3 className="font-bold text-lg mb-4">Поддержка</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="/support" className="hover:text-primary transition-colors">Техподдержка</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">FAQ</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Документация</a></li>
+                <li>
+                  <a
+                    href="/support"
+                    className="hover:text-primary transition-colors"
+                  >
+                    Техподдержка
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    FAQ
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    Документация
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
               <h3 className="font-bold text-lg mb-4">Разработчикам</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-primary transition-colors">API</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">SDK</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Публикация</a></li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    API
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    SDK
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    Публикация
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
               <h3 className="font-bold text-lg mb-4">Аккаунт</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-primary transition-colors">Войти</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Регистрация</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Профиль</a></li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    Войти
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    Регистрация
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    Профиль
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
           <Separator className="my-8" />
           <div className="text-center text-sm text-muted-foreground">
-            <p>© 2024 Rust Plugins Store. Все права защищены.</p>
+            <p>© 2024 Rust ToxicRust Store. Все права защищены.</p>
           </div>
         </div>
       </footer>
